@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Quote from './Quote';
+//import PropTypes from "prop-types";
+
 
 export default class QuoteSearcher extends Component {
   state = {
@@ -7,6 +9,8 @@ export default class QuoteSearcher extends Component {
     fetching: true,
     error: false,
     search: '',
+    likes: 0,
+    dislikes: 0,
   }
   componentDidMount() {
     console.log('component is mounting')
@@ -25,11 +29,6 @@ export default class QuoteSearcher extends Component {
      }))
     console.log('component mounted')
   }
-  // componentDidMount(){
-  //   console.log('component is mounting')
-  //   setTimeout(() => {this.getQuotes()}, 1000);
-  //   console.log('component mounted')
-  // }
   getQuotes() {
     this.setState({
       fetching: true,
@@ -48,36 +47,41 @@ export default class QuoteSearcher extends Component {
          error: true,
      }))
   }
-  
   handleInputChange = (event) => {
     event.preventDefault();
     this.setState({
       search: event.target.value,
     })
   }
-
   handleSubmit = (event) =>{
     event.preventDefault()
-    console.log("search for this.state.search", this.state.search);
+    console.log("search for this.state.search, ", this.state.search);
     this.getQuotes();
   }
-
   searchOutput = () => {
     this.state.quotes.map((quote, index) => {
-      return <li key={index}>{quote.value}</li>;
+      return <ul key={index}>{quote.value}</ul>;
     })
   }
+  
+  // const total = values.reduce((accumulator, currentValue) => {
+  //   return accumulator + currentValue
+  // }, initialValue)
+
   render() {
     const errorMessage = <h1>OOPSADAISY, ERRRRRRORRRR!!!</h1>
     const fetchingMessage = <h1>Loading.......Just give it a second!</h1>
+    // const allLikes = this.props.liked.reduce((acc, curV) => {
+    //   return acc + curV
+    // }, 0);
     const actQuotes = this.state.quotes.map(item => {
       return (
         <Quote 
-          key = {item._id}  /** in console, it will ask for this key to be defined, give react what it wants! */
+          key = {item._id}  
           actQuote = {item.quoteText}
           author = {item.quoteAuthor}
-          numLikes = {this.props.numLikes}
-          numDislikes = {this.props.numDislikes}
+          liked = {this.props.liked}
+          disliked = {this.props.disliked}
         />
       )
     })
@@ -85,6 +89,7 @@ export default class QuoteSearcher extends Component {
       return (
         <div>
           <h1>Quotes</h1>
+    <p>total likes: </p>
           <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -94,7 +99,7 @@ export default class QuoteSearcher extends Component {
           />
           <input
             type="submit"
-            value="Search"
+            value="Search!"
             onClick={this.handleSubmit}
           />
         </form>
@@ -113,3 +118,5 @@ export default class QuoteSearcher extends Component {
     } 
   }
 }
+
+

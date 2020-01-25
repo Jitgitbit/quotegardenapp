@@ -1,22 +1,29 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+//import PropTypes from "prop-types";
+
 
 export default class Quote extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.increase = this.increase.bind(this);
+  // }
   state = {
-    numLikes: 0,
-    numDislikes: 0
+     likes: 0,
+     dislikes: 0
   };
   increase = () => {
     this.setState({
-      numLikes: this.state.numLikes + 1
+      likes: this.state.likes + 1
     });
-    console.log(this.state.numLikes);
+    console.log(this.state.likes);
   };
   decrease = () => {
     this.setState({
-      numDislikes: this.state.numDislikes + 1
+      dislikes: this.state.dislikes + 1
     });
-    console.log(this.state.numDislikes);
+    console.log(this.state.dislikes);
   };
+  
   render() {
     return (
       <div className="quote-list">
