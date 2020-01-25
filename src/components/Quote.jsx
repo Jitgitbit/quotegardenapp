@@ -1,13 +1,33 @@
 import React, { Component } from 'react'
 
 export default class Quote extends Component {
+  state = {
+    numLikes: 0,
+    numDislikes: 0
+  };
+  increase = () => {
+    this.setState({
+      numLikes: this.state.numLikes + 1
+    });
+    console.log(this.state.numLikes);
+  };
+  decrease = () => {
+    this.setState({
+      numDislikes: this.state.numDislikes + 1
+    });
+    console.log(this.state.numDislikes);
+  };
   render() {
     return (
-      <div className="article card">
+      <div className="quote-list">
         <div className="row">
-          <div className="col half">
+          <div className="col">
             <h3>{ this.props.actQuote }</h3>
-            <ul>{'By: ' + this.props.author }</ul>
+            <ul>
+              {'By: ' + this.props.author } 
+              <button onClick={this.increase}>{`:)`}</button>   
+              <button onClick={this.decrease}>{`:(`}</button>
+            </ul>
           </div>
         </div>
       </div>
