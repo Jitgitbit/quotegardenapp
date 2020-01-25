@@ -9,6 +9,7 @@ export default class QuoteSearcher extends Component {
     search: '',
   }
   componentDidMount() {
+    console.log('component is mounting')
     fetch(`https://quote-garden.herokuapp.com/quotes/search/tree`)
      .then(res => res.json())
      .then(myJson => {
@@ -22,6 +23,7 @@ export default class QuoteSearcher extends Component {
        this.setState({
          error: true,
      }))
+    console.log('component mounted')
   }
   // componentDidMount(){
   //   console.log('component is mounting')
@@ -29,6 +31,9 @@ export default class QuoteSearcher extends Component {
   //   console.log('component mounted')
   // }
   getQuotes() {
+    this.setState({
+      fetching: true,
+    })
     fetch(`https://quote-garden.herokuapp.com/quotes/search/${this.state.search}`)
      .then(res => res.json())
      .then(myJson => {
@@ -54,11 +59,11 @@ export default class QuoteSearcher extends Component {
   handleSubmit = (event) =>{
     event.preventDefault()
     console.log("search for this.state.search", this.state.search);
-    this.getQuotes()
+    this.getQuotes();
   }
 
   searchOutput = () => {
-    return this.state.quotes.map((quote, index) => {
+    this.state.quotes.map((quote, index) => {
       return <li key={index}>{quote.value}</li>;
     })
   }
@@ -103,7 +108,7 @@ export default class QuoteSearcher extends Component {
       );
     } else if (this.state.error) {
       return <div>{errorMessage}</div>;
-    } else if (this.state.fetching){
+    } else {
       return <div>{fetchingMessage}</div>;
     } 
   }

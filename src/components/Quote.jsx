@@ -23,11 +23,9 @@ export default class Quote extends Component {
         <div className="row">
           <div className="col">
             <h3>{ this.props.actQuote }</h3>
-            <ul>
               {'By: ' + this.props.author } 
               <button onClick={this.increase}>{`:)`}</button>   
               <button onClick={this.decrease}>{`:(`}</button>
-            </ul>
           </div>
         </div>
       </div>
