@@ -29,6 +29,7 @@ export default class QuoteSearcher extends Component {
    //this.getQuote();
  }
   render() {
+    const errorMessage = <h1>OOPSADAISY, ERRRRRRORRRR!!!</h1>
     const actQuotes = this.state.quotes.map(item => {
       return (
         <Quote 
@@ -38,34 +39,19 @@ export default class QuoteSearcher extends Component {
         />
       )
     })
-    return (
-      <div>
-        <h1>Quotes</h1>
-        <ul>
-        { actQuotes }
-        </ul>
-      </div>// articleCards is the newly mapped array represented in the form of a list!
-    );
+    if(this.state.fetching){
+      return (
+        <div>
+          <h1>Quotes</h1>
+          <ul>
+          { actQuotes }
+          </ul>
+        </div>// articleCards is the newly mapped array represented in the form of a list!
+      );
+    } else if (this.state.error) {
+      return <div>{errorMessage}</div>;
+    } else {
+      return <div>{'Loading.......Just give it half a second!'}</div>;
+    } 
   }
 }
-
-// render() {
-//   const errorMessage = <h1>OOPSADAISY, ERRRRRRORRRR!!!</h1>
-//   if (this.state.loading) {
-//     return <div>
-//               <h3>Random Quote!!</h3>
-//               {this.state.data.value}
-//               <div>
-//                 {/* <button onClick={this.newQuote()}>Get another random quote!</button> */}
-//                 <button onClick={() => {this.newQuote()}}>Get another random quote!</button> {/* Look! adding the arrowfunction solved it! */}
-//               </div>
-//               <LikeCounter/>
-//               <br/>
-//               <Link to={ `/searchQuotePage/` } style={{color: 'white'}}>Look up a quote</Link>
-//             </div>;
-//   } else if (this.state.error) {
-//     return <div>{errorMessage}</div>;
-//   } else {
-//     return <div>{'Loading.......Just give it one second!'}</div>;
-//   }
-// }
