@@ -12,15 +12,24 @@ export default class QuoteSearcher extends Component {
     likes: 0,
     dislikes: 0,
   }
+  onlyOne = (quotesArray) => {
+    return quotesArray.reduce((unique, next) => {
+      if (!unique.some(obj => obj.quoteText === next.quoteText)) {
+        unique.push(next);
+      }
+      return unique;
+    }, []);
+  };
   componentDidMount() {
     console.log('component is mounting')
+    console.log(this.props.likes)
     fetch(`https://quote-garden.herokuapp.com/quotes/search/tree`)
      .then(res => res.json())
      .then(myJson => {
          console.log(myJson)
          setTimeout(this.setState({
-           quotes: myJson.results,
-           fetching: false,
+            quotes: this.onlyOne(myJson.results),
+            fetching: false,
          }), 1000);    
      })
      .catch(err => 
@@ -38,8 +47,8 @@ export default class QuoteSearcher extends Component {
      .then(myJson => {
          console.log(myJson)
          setTimeout(this.setState({
-           quotes: myJson.results,
-           fetching: false,
+            quotes: this.onlyOne(myJson.results),
+            fetching: false,
          }), 1000);    
      })
      .catch(err => 
@@ -63,25 +72,17 @@ export default class QuoteSearcher extends Component {
       return <ul key={index}>{quote.value}</ul>;
     })
   }
-  
-  // const total = values.reduce((accumulator, currentValue) => {
-  //   return accumulator + currentValue
-  // }, initialValue)
-
   render() {
     const errorMessage = <h1>OOPSADAISY, ERRRRRRORRRR!!!</h1>
     const fetchingMessage = <h1>Loading.......Just give it a second!</h1>
-    // const allLikes = this.props.liked.reduce((acc, curV) => {
-    //   return acc + curV
-    // }, 0);
     const actQuotes = this.state.quotes.map(item => {
       return (
         <Quote 
           key = {item._id}  
           actQuote = {item.quoteText}
           author = {item.quoteAuthor}
-          liked = {this.props.liked}
-          disliked = {this.props.disliked}
+          likes = {this.props.likes}
+          dislikes = {this.props.dislikes}
         />
       )
     })

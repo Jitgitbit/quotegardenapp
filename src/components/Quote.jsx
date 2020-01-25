@@ -9,7 +9,7 @@ export default class Quote extends Component {
   // }
   state = {
      likes: 0,
-     dislikes: 0
+     dislikes: 0,
   };
   increase = () => {
     this.setState({
@@ -25,13 +25,16 @@ export default class Quote extends Component {
   };
   
   render() {
+    
     return (
       <div className="quote-list">
         <div className="row">
           <div className="col">
             <h3>{ this.props.actQuote }</h3>
-              {'By: ' + this.props.author } 
-              <button onClick={this.increase}>{`:)`}</button>   
+              {'By: ' + this.props.author } <br/>
+              <b>{ this.state.likes }</b>
+              <button onClick={this.increase}>{`:)`}</button>
+              <b>{ this.state.dislikes }</b>   
               <button onClick={this.decrease}>{`:(`}</button>
           </div>
         </div>
