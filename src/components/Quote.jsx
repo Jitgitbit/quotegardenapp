@@ -7,7 +7,7 @@ export default class Quote extends Component {
         <div className="row">
           <div className="col half">
             <h3>{ this.props.actQuote }</h3>
-            <p>By: { this.props.author }</p>
+            <ul>{'By: ' + this.props.author }</ul>
           </div>
         </div>
       </div>
