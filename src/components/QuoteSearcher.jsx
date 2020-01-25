@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Quote from './Quote';
 
 export default class QuoteSearcher extends Component {
   state = {
@@ -17,14 +18,24 @@ export default class QuoteSearcher extends Component {
         "_id": "5d91b45d9980192a317c8955",
         "quoteText": "Good timber does not grow with ease; the stronger the wind, the stronger the trees.",
         "quoteAuthor": "J. Willard Marriott"
-      },
+      }
     ]
   }
   render() {
+    const actQuotes = this.state.quotes.map(item => {
+      return (
+        <Quote 
+          key = {item._id}  /** in console, it will ask for this key to be defined, give react what it wants! */
+          actQuote = {item.quoteText}
+          author = {item.quoteAuthor}
+        />
+      )
+    })
     return (
       <div>
-        
-      </div>
-    )
+        <h1>Quotes</h1>
+        { actQuotes }
+      </div>// articleCards is the newly mapped array represented in the form of a list!
+    );
   }
 }
