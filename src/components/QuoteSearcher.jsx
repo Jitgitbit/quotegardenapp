@@ -24,12 +24,13 @@ export default class QuoteSearcher extends Component {
  }
  componentDidMount(){
    console.log('component is mounting')
-   setTimeout(() => {this.getQuotes()}, 500);
+   setTimeout(() => {this.getQuotes()}, 1000);
    console.log('component mounted')
    //this.getQuote();
  }
   render() {
     const errorMessage = <h1>OOPSADAISY, ERRRRRRORRRR!!!</h1>
+    const fetchingMessage = <h1>Loading.......Just give it a second!</h1>
     const actQuotes = this.state.quotes.map(item => {
       return (
         <Quote 
@@ -51,7 +52,7 @@ export default class QuoteSearcher extends Component {
     } else if (this.state.error) {
       return <div>{errorMessage}</div>;
     } else {
-      return <div>{'Loading.......Just give it half a second!'}</div>;
+      return <div>{fetchingMessage}</div>;
     } 
   }
 }
