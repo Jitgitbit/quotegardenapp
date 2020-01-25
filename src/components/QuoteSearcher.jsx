@@ -26,7 +26,6 @@ export default class QuoteSearcher extends Component {
    console.log('component is mounting')
    setTimeout(() => {this.getQuotes()}, 1000);
    console.log('component mounted')
-   //this.getQuote();
  }
   render() {
     const errorMessage = <h1>OOPSADAISY, ERRRRRRORRRR!!!</h1>
@@ -37,6 +36,8 @@ export default class QuoteSearcher extends Component {
           key = {item._id}  /** in console, it will ask for this key to be defined, give react what it wants! */
           actQuote = {item.quoteText}
           author = {item.quoteAuthor}
+          numLikes = {this.props.numLikes}
+          numDislikes = {this.props.numDislikes}
         />
       )
     })
@@ -47,7 +48,7 @@ export default class QuoteSearcher extends Component {
           <ul>
           { actQuotes }
           </ul>
-        </div>// articleCards is the newly mapped array represented in the form of a list!
+        </div>
       );
     } else if (this.state.error) {
       return <div>{errorMessage}</div>;
