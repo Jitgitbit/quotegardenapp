@@ -12,6 +12,18 @@ export default class QuoteSearcher extends Component {
     likes: 0,
     dislikes: 0,
   }
+  increase = () => {
+    this.setState({
+      likes: this.state.likes + 1
+    });
+    console.log(this.state.likes);
+  };
+  decrease = () => {
+    this.setState({
+      dislikes: this.state.dislikes + 1
+    });
+    console.log(this.state.dislikes);
+  };
   onlyOne = (quotesArray) => {
     return quotesArray.reduce((unique, next) => {
       if (!unique.some(obj => obj.quoteText === next.quoteText)) {
@@ -22,7 +34,6 @@ export default class QuoteSearcher extends Component {
   };
   componentDidMount() {
     console.log('component is mounting')
-    console.log(this.props.likes)
     fetch(`https://quote-garden.herokuapp.com/quotes/search/tree`)
      .then(res => res.json())
      .then(myJson => {
@@ -81,8 +92,10 @@ export default class QuoteSearcher extends Component {
           key = {item._id}  
           actQuote = {item.quoteText}
           author = {item.quoteAuthor}
-          likes = {this.props.likes}
-          dislikes = {this.props.dislikes}
+          likes = {this.state.likes}
+          increase = {this.increase}
+          dislikes = {this.state.dislikes}
+          decrease = {this.decrease}
         />
       )
     })
@@ -90,7 +103,8 @@ export default class QuoteSearcher extends Component {
       return (
         <div>
           <h1>Quotes</h1>
-    <p>total likes: </p>
+    <p>total likes: <b>{ this.state.likes }</b> total dislikes: <b>{ this.state.dislikes }</b></p>           
+
           <form onSubmit={this.handleSubmit}>
           <input
             type="text"
