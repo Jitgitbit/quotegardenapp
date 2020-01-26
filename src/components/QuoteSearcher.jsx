@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import Quote from './Quote';
-//import PropTypes from "prop-types";
-
 
 export default class QuoteSearcher extends Component {
   state = {
