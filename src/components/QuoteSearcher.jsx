@@ -12,7 +12,7 @@ export default class QuoteSearcher extends Component {
   }
   increase = () => {
     this.setState({
-      likes: this.state.likes + 1
+      likes: this.state.likes + 1 
     });
     console.log(this.state.likes);
   };
@@ -30,6 +30,7 @@ export default class QuoteSearcher extends Component {
       return unique;
     }, []);
   };
+  
   componentDidMount() {
     console.log('component is mounting')
     fetch(`https://quote-garden.herokuapp.com/quotes/search/tree`)
